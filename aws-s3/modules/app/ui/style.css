@@ -1,0 +1,576 @@
+/* --- Global & Resets --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #1A1110;
+    /* 深酒红近黑色背景 */
+    color: #e0e0e0;
+    line-height: 1.6;
+    padding: 1rem;
+}
+
+/* --- Wine Red Color Palette --- */
+:root {
+    --wine-red-dark: #900D0D;
+    /* 主要深酒红色 */
+    --wine-red-medium: #B03A2E;
+    /* 中等酒红色，用于链接、渐变 */
+    --wine-red-light: #C74949;
+    /* 稍亮的酒红色，用于悬停、渐变 */
+    --text-light: #e0e0e0;
+    --text-white: #ffffff;
+    --bg-dark: #1A1110;
+    /* 主背景 */
+    --bg-item: #2C1D1C;
+    /* 项目背景，带轻微红色调 */
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    /* 微妙边框 */
+    --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+a {
+    color: var(--wine-red-medium);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--wine-red-light);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0.75rem;
+    color: var(--text-white);
+    font-weight: 600;
+}
+
+header,
+footer {
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+header h1 {
+    font-size: 2rem;
+    /* Wine Red Gradient Title */
+    background: linear-gradient(90deg, var(--wine-red-light), var(--wine-red-medium));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+header h1 i {
+    /* Style icon within h1 */
+    background: none;
+    /* Remove gradient from icon */
+    -webkit-text-fill-color: var(--wine-red-medium);
+    /* Standard icon color */
+    text-fill-color: var(--wine-red-medium);
+    margin-right: 0.5rem;
+    font-size: 0.9em;
+    /* Slightly smaller icon */
+}
+
+
+header p,
+footer p {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+}
+
+/* --- Bento Grid Container --- */
+.bento-container {
+    display: grid;
+    /* Example using 4 columns */
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(150px, auto);
+    /* Rows adjust height, min 150px */
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* --- Bento Grid Item --- */
+.bento-item {
+    background-color: var(--bg-item);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bento-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Emphasized Title */
+.bento-item h3 {
+    font-size: 1.3rem;
+    color: var(--text-white);
+    /* Keep titles white for contrast */
+    margin-bottom: 1rem;
+}
+
+/* --- Specific Item Styles --- */
+
+/* Spanning */
+.item-span-2 {
+    grid-column: span 2;
+}
+
+.item-span-3 {
+    grid-column: span 3;
+}
+
+.item-span-row-2 {
+    grid-row: span 2;
+}
+
+/* Text Center */
+.text-center {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Large Icon */
+.icon-large {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--wine-red-medium);
+    /* Icon color */
+}
+
+.icon-large.success {
+    color: #50C878;
+    /* Keep success green, or change to a lighter red/white */
+    /* color: var(--wine-red-light); */
+}
+
+/* Stats */
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--text-white);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #a0a0a0;
+    text-transform: uppercase;
+}
+
+/* Highlight Stat (at bottom) */
+.highlight-stat {
+    margin-top: auto;
+    /* Push to bottom */
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.highlight-stat span {
+    display: block;
+    font-size: 0.9rem;
+    color: #a0a0a0;
+}
+
+.highlight-stat strong {
+    font-size: 1.8rem;
+    color: var(--text-white);
+}
+
+/* Lists */
+.bento-item ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.5rem;
+}
+
+.bento-item li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.bento-item li i {
+    margin-right: 0.75rem;
+    width: 1.2em;
+    text-align: center;
+    color: var(--wine-red-medium);
+    /* Icon color in lists */
+}
+
+/* Notification/Benefit List */
+.notification-list li {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    border-left: 3px solid var(--wine-red-medium);
+    /* Use wine red for border */
+    padding-left: 0.8rem;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-right: 0.5em;
+    font-weight: bold;
+    color: var(--text-white);
+    /* White text on tags */
+}
+
+.tag.benefit {
+    background-color: var(--wine-red-dark);
+}
+
+/* Use dark wine red for benefits */
+/* You can add other tag styles here if needed */
+
+
+/* Item with Image */
+.item-with-image {
+    padding: 0;
+    /* Remove padding to allow image fill */
+    position: relative;
+}
+
+.item-with-image h3,
+.item-with-image p {
+    padding: 1.5rem;
+    /* Add padding back to text elements */
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.item-with-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    /* Limit image height */
+    object-fit: cover;
+    /* Cover the area, cropping if needed */
+    border-radius: 0 0 16px 16px;
+    /* Match bottom corners radius */
+    margin-top: auto;
+    /* Push image to bottom */
+    /* Optional: add a dark overlay for better text readability */
+    /* filter: brightness(0.8); */
+}
+
+/* Simple CSS Bar Chart */
+.simple-chart {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    /* Bars grow from bottom */
+    /* Adjust height or flex properties if needed for taller container */
+    height: 150px;
+    /* Increase height? Or use flex-grow? */
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    flex-grow: 1;
+    /* Allow chart to grow */
+}
+
+.simple-chart .bar {
+    /* Wine Red Gradient Bars */
+    background: linear-gradient(to top, var(--wine-red-dark), var(--wine-red-light));
+    width: 18%;
+    border-radius: 4px 4px 0 0;
+    /* Top corners rounded */
+    position: relative;
+    transition: height 0.5s ease-out;
+}
+
+/* Optional: Show label below bar */
+.simple-chart .bar::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -1.5em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: #a0a0a0;
+}
+
+/* Large Feature / CTA Item */
+.item-large-feature {
+    align-items: center;
+    /* Center content vertically */
+    text-align: center;
+}
+
+.feature-placeholder {
+    margin-top: 1rem;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    /* Slightly darker placeholder bg */
+    border-radius: 12px;
+    flex-grow: 1;
+    /* Take remaining space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-placeholder i.fa-rocket {
+    /* Target specific icon if needed */
+    font-size: 4rem;
+    color: var(--wine-red-light);
+    /* Use lighter red for prominent icon */
+    margin-bottom: 1.5rem;
+}
+
+.feature-placeholder span {
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+/* CTA Button Style */
+.cta-button {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--wine-red-light), var(--wine-red-medium));
+    color: var(--text-white);
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(144, 13, 13, 0.3);
+    /* Reddish shadow */
+}
+
+.cta-button:hover {
+    color: var(--text-white);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(144, 13, 13, 0.5);
+}
+
+.learn-more-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--wine-red-light);
+}
+
+.learn-more-link:hover {
+    text-decoration: underline;
+    color: var(--wine-red-light);
+}
+
+.learn-more-link i {
+    font-size: 0.8em;
+}
+
+/* Quote */
+.quote-author {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #a0a0a0;
+    text-align: right;
+}
+
+/* --- Integration Logos Style --- */
+.integration-logos {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow logos to wrap on smaller containers */
+    gap: 1rem;
+    /* Spacing between logos */
+    margin-top: 1rem;
+    align-items: center;
+    /* Vertically align logos if they have different heights */
+}
+
+.logo-placeholder {
+    display: inline-flex;
+    /* Use flex for centering icon/text */
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    /* Fixed height */
+    min-width: 60px;
+    /* Minimum width */
+    padding: 0 0.5rem;
+    /* Horizontal padding */
+    background-color: rgba(255, 255, 255, 0.05);
+    /* Subtle background */
+    border-radius: 6px;
+    font-size: 0.8rem;
+    /* Text size */
+    color: var(--text-light);
+    /* Text/icon color */
+    border: 1px solid var(--border-subtle);
+}
+
+.logo-placeholder i {
+    /* Style for Font Awesome icons used as logos */
+    font-size: 1.5rem;
+    /* Make icon larger */
+    color: var(--text-light);
+    /* Icon color */
+}
+
+/* Specific styling for Font Awesome Zoom example if using */
+.fa-zoom::before {
+    /* Example targeting Font Awesome - may need adjustment */
+    /* Add specific styles if needed */
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    .bento-container {
+        grid-template-columns: repeat(3, 1fr);
+        /* Medium screens: 3 columns */
+    }
+
+    .item-span-3 {
+        grid-column: span 2;
+        /* Max span 2 */
+    }
+
+    /* Adjust other spans if needed for 3 columns */
+    .item-span-2 {
+        /* Should wrap correctly */
+    }
+
+    .item-large-feature {
+        /* Item 8 */
+        grid-column: span 2;
+        /* Adjust if needed */
+    }
+
+    .item-span-row-2 {
+        /* Affects Item 4 and 5 */
+        /* Maintain row span if possible, or let it collapse if grid becomes too narrow */
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .bento-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* Small screens: 2 columns */
+        gap: 0.8rem;
+    }
+
+    /* Most items span 1 column */
+    .item-span-2,
+    .item-span-3 {
+        grid-column: span 1;
+    }
+
+    /* Let items spanning rows also potentially span full width if they were large */
+    .item-large-feature,
+    /* Item 8 */
+    .bento-item.item-span-2:has(.integration-logos),
+    /* Item 11 */
+    .item-span-row-2
+
+    /* Items 4 and 5 */
+        {
+        grid-column: span 2;
+        /* Let these take full width */
+        grid-row: span 1;
+        /* Collapse row span on small screens */
+    }
+
+    /* Re-apply specific single column span for items that shouldn't be full width */
+    .bento-item:not(.item-large-feature):not(:has(.integration-logos)):not(.item-span-row-2) {
+        /* Ensure standard items are 1 col wide unless specified otherwise */
+        /* This rule might be too broad, check overrides */
+    }
+
+    /* Simpler approach: Reset all spans first, then re-apply needed ones */
+    .bento-item {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .item-large-feature,
+    .bento-item.item-span-2:has(.integration-logos) {
+        grid-column: span 2;
+        /* Make these specific ones full width */
+    }
+
+
+    .bento-item {
+        padding: 1rem;
+    }
+
+    .bento-item h3 {
+        font-size: 1.1rem;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+    }
+
+    .icon-large {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .bento-container {
+        grid-template-columns: 1fr;
+        /* Extra small screens: 1 column */
+        gap: 0.8rem;
+    }
+
+    /* All items span 1 column and 1 row */
+    .item-span-2,
+    .item-span-3,
+    .item-span-row-2,
+    .item-large-feature {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .item-with-image img {
+        max-height: 150px;
+        /* Adjust image height */
+    }
+
+    .simple-chart {
+        height: 120px;
+        /* Adjust chart height on smallest screens */
+    }
+}
